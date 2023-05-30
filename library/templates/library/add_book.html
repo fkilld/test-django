@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+<h2>add book</h2>
+<form action="" method="post">
+  {% csrf_token %}
+
+  <div>
+    <label for="book_name">Book name</label>
+    <input type="text" name="book_name" required />
+  </div>
+  <div>
+    <label for="book_description">Book description</label>
+    <input type="text" name="book_description" required />
+  </div>
+  <div>
+    <label for="author">Book author</label>
+    <select name="author" id="">
+      {% for author in authors %}
+      <option value="{{author.id}}">{{author.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+   <label for="categories">categories</label>
+   <select name="categories" id="">
+    {% for categorie in categories  %}
+    <option value="{{categorie.id}}">{{categorie.cat_name}}</option>
+    {% endfor %}
+   </select>
+  </div>
+  <button>submit</button>
+</form>
+{% endblock content %}

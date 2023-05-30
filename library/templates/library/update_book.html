@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>update book</h2>
+<form action="" method='post'>
+{% csrf_token %}
+ <div>
+      <label for="book_name">Book Name:</label>
+      <input type="text" name="book_name" value="{{ book.book_name }}" required>
+    </div>
+    <div>
+      <label for="book_description">Book Description:</label>
+      <textarea name="book_description" required>{{ book.book_description }}</textarea>
+    </div>
+    <div>
+      <label for="author">Author:</label>
+      <select name="author">
+        {% for author in authors %}
+          <option value="{{ author.id }}" {% if author == book.author %}selected{% endif %}>{{ author.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="categories">Categories:</label>
+      <select name="categories" multiple>
+        {% for category in categories %}
+          <option value="{{ category.id }}" {% if category in book.categories.all %}selected{% endif %}>{{ category.cat_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+{% endblock content %}
